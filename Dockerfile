@@ -7,14 +7,14 @@ ENV npmuse=1
 ENV node_env="testing"
 ARG username="jenkins"
 ARG appdir="nodeapps"
-run adduser -ms /bin/bash $username
-run mkdir -p /home/$username/$appdir/
+run useradd -ms /bin/bash $username
+run mkdir -p /home/${username}/${appdir}/
 run apt-get update -y && \
     apt-get install -y git
-USER $username
-workdir /home/$username/$appdir
+#USER $username
+workdir /home/${username}/${appdir}
 run git clone https://github.com/priteshkumar/movielist.git
 run cd movielist && npm install
-expose PORT 3000
-run node server.js
+expose 3000/tcp
+entrypoint ["/bin/sh",-"-c","node --version"]
 

@@ -14,7 +14,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 var mysql = require("mysql");
-/*
+
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -30,17 +30,17 @@ connection.connect(function(err) {
 
   console.log("connected as id " + connection.threadId);
 });
-*/
+
 
 // Use Handlebars to render the main index.html page with the todos in it.
 app.get("/", function(req, res) {
- /* connection.query("SELECT * FROM movies;", function(err, data) {
+  connection.query("SELECT * FROM movies;", function(err, data) {
     if (err) {
       return res.status(500).end();
-    }*/
+    }
 
-    res.render("index", { movies: [{"id":1,"movie":"smokinaces"},{"id":2,"movie":"exam"}] });
-  //});
+    res.render("index", { movies: data });
+  });
 });
 
 
