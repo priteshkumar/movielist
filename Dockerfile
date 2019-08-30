@@ -11,14 +11,12 @@ run useradd -ms /bin/bash $username
 #run usermod -a -G wheel $username
 run usermod -a -G sudo $username
 run mkdir -p /home/${username}/${appdir}/
-#run apt-get update -y && \
-#    apt-get install -y git
 run chown -R $username /home/${username}/${appdir}/
 USER $username
-workdir /home/${username}/${appdir}/
-#run git clone https://github.com/priteshkumar/movielist.git -b nodb
-run cd movielist && npm install
-workdir movielist
+copy . /home/${username}/${appdir}/moviapp
+workdir /home/${username}/${appdir}/moviapp
+run npm install
+
 expose 3000/tcp
 entrypoint ["/bin/sh","-c","node server.js"]
 
