@@ -19,6 +19,7 @@ workdir /home/${username}/${appdir}/
 run git clone https://github.com/priteshkumar/movielist.git -b nodb
 run cd movielist && npm install
 workdir movielist
+run rm -rf .git
 expose 3000/tcp
 entrypoint ["/bin/sh","-c","node server.js"]
 
